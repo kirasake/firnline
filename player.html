@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru" class="theme-arctic">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Профиль игрока — [НАЗВАНИЕ]</title>
+  <meta name="description" content="Профиль игрока: статистика по каждой игре, место в общем рейтинге. Демо-данные.">
+  <meta name="theme-color" content="#2E4357">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect width='30' height='30' fill='%232E4357'/%3E%3Cpath d='M6 21 L12 11 L15 15 L18 9 L24 21' fill='none' stroke='%23F4F7FA' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/arctic.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script defer src="data/site.js"></script>
+  <script defer src="data/games.js"></script>
+  <script defer src="data/players.js"></script>
+  <script defer src="data/news.js"></script>
+  <script defer src="js/core.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/pages/player.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <noscript>
+    <p class="noscript-note">[ NO JS ] Профили, статистика и рейтинги собираются скриптом — включите JavaScript. Разделы сайта доступны по ссылкам ниже.</p>
+  </noscript>
+
+  <header data-gp-header class="site-header">
+    <div class="container site-header__bar">
+      <a class="logo" href="index.html"><span class="logo__name">[НАЗВАНИЕ]</span></a>
+      <nav class="nav" aria-label="Основное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">[ Главная ]</a></li>
+          <li><a class="nav__link" href="players.html">[ Игроки ]</a></li>
+          <li><a class="nav__link" href="rankings.html">[ Рейтинги ]</a></li>
+          <li><a class="nav__link" href="news.html">[ Новости ]</a></li>
+        </ul>
+      </nav>
+      <span class="demo-badge">[ DEMO DATA ]</span>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-head" aria-labelledby="page-title">
+      <div class="container">
+        <div class="label-stack" data-reveal>
+          <span class="label label--strong">[ 01 / PLAYER FILE ]</span>
+          <span class="label">PROFILE / BY GAME</span>
+          <span class="label">DEMO DATA</span>
+        </div>
+        <h1 class="display page-head__title" id="page-title" data-reveal style="--i:1">Профиль<span class="tm" aria-hidden="true">™</span></h1>
+      </div>
+    </section>
+    <section class="section section--deep page-body" aria-label="Профиль игрока">
+      <div class="container">
+        <div data-profile></div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-gp-footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__note"><strong>Игроки и цифры условные.</strong> Это демо-данные для примера.</p>
+    </div>
+  </footer>
+</body>
+</html>
