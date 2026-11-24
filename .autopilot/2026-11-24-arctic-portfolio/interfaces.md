@@ -73,3 +73,13 @@ GPUI.gameSwitch(games, activeId|null, onChange, { withAll: bool }) -> Element  /
 - Один файл: `node --test tests/core.test.js`
 - Визуальная проверка: страницы на ширине 375 и 1280 px; в консоли нет ошибок.
 - Не трогать: `.autopilot/`, `AGENTS.md`, `CLAUDE.md`, `references/`.
+
+## Что построили завершённые таски
+
+### 01
+- `GP` — все функции из границ, плюс `GP.totalRating(player) -> number` (сумма rating по всем играм).
+- `GPUI.mount, el, avatar, emptyState, gameSwitch` — как в границах; плюс `GPUI.svg(tag, attrs, ...children)`, `bracket(text, cls)`, `tm()`, `counter(cur, total)`, `reveal(scope)`, `initials(nick)`.
+- `data/*.js` — UMD: в браузере `window.GP_DATA.<key>`, в Node `module.exports`. 24 игрока; у `icefloe` три игры с 0 матчей — valorant, apex, dota2 (проверка «—»). Исправлено по точечному ревью: раньше здесь ошибочно стоял `iceberg9`.
+- CSS-классы для страниц: `.container .section .section--deep .section-head(__meta/__aside) .h-mega .display .h2 .h3 .label(--bracket/--strong) .label-stack .lead .counter .btn-oct(--deep/--on-light) .btn-outline[aria-pressed] .link-arrow .card-chamfer(--light/--surface) .game-switch .gp-table(.num, .col-secondary скрыт <768px, th[aria-sort] button) .empty-state .field .noscript-note [data-reveal] .reveal-lines>.line-mask>span [data-parallax]`. Стили главной — в `css/home.css`.
+- Шаблон страницы — `index.html`: `html.theme-arctic`, инлайн-скрипт в head ставит класс `.js`, статичная запасная шапка и футер (mount их заменяет), `<noscript>`. Новые страницы копируют этот шаблон.
+- Шапка: пятая ссылка «Лидер» ведёт на `player.html?id=<игрок №1 общего рейтинга>`.

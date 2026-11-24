@@ -1,7 +1,33 @@
 <!-- autopilot:start -->
-# Портфолио Arctic
+# Firnline — статический сайт игровой платформы (демо-данные, Arctic Tech-Wear)
 
-Статический сайт-портфолио в стиле Arctic Tech-Wear для смешанной аудитории: работодатели, заказчики, коллеги.
+## Команды
+
+Установки нет: ни `package.json`, ни зависимостей. Node нужен только для тестов.
+
+- Все тесты (23): `node --test tests/`
+- Один файл: `node --test tests/core.test.js`
+- Запуск: открыть `index.html` в браузере (работает с `file://`)
+- По http: `npx -y http-server -p 8095 .`
+
+## Где что
+
+- `js/core.js` — чистая логика (винрейт, рейтинги, поиск), UMD: `window.GP` и `module.exports`; контракты — `.autopilot/2026-11-24-arctic-portfolio/interfaces.md`
+- `js/ui.js` — шапка, футер, demo-метка, `GPUI.mount`, DOM-хелперы (`window.GPUI`)
+- `js/pages/<page>.js` — сборка одной страницы (home, players, player, rankings, news) из `GP_DATA`
+- `data/*.js` — site, games, players, news; формат и как заменить демо — `README.md`
+- `css/arctic.css` — токены `.theme-arctic` и общие компоненты; `css/home.css` — главная; `css/pages.css` — остальные четыре страницы
+- `references/DESIGN-SYSTEM.md` — визуальный источник истины (раздел 1, токены в §8); не править
+- `tests/` — `core.test.js` (логика), `data.test.js` (целостность данных)
+
+## Подводные камни
+
+- Данные — `data/*.js` в `window.GP_DATA`, не JSON: `fetch` не работает с `file://`. Данные в DOM только через `textContent` / `GPUI.el`, не `innerHTML`.
+- Инлайн-скрипт в `<head>` ставит `.js` и снимает его на `DOMContentLoaded`, если нет `gp-mounted`. `GPUI.mount` вызывай синхронно при загрузке страницы, не из `DOMContentLoaded`. Строка продублирована в 5 html-файлах — правь везде.
+- Порядок `<script defer>` на каждой странице: `data/site, games, players, news`, `js/core`, `js/ui`, `js/pages/<page>`.
+- Название платформы — `Firnline`, одна константа в `data/site.js`; запасное `[НАЗВАНИЕ]` в `js/ui.js` видно, только если site.js не загрузился.
+- `assets/img/*.webp` сгенерированы; промпты и команда генерации — в `README.md`.
+- Git на Windows: `git config core.longpaths true` — в `.autopilot/` длинные пути.
 
 ## Как здесь работает Autopilot
 
