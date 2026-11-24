@@ -10,8 +10,10 @@ const news = require("../data/news.js");
 const GAME_IDS = ["dota2", "cs2", "valorant", "apex"];
 const STAT_KEYS = ["matches", "wins", "kills", "deaths", "assists", "hours", "rating"];
 
-test("site: заглушка названия и флаг демо", () => {
-  assert.equal(site.name, "[НАЗВАНИЕ]");
+test("site: настоящее название вместо заглушки и флаг демо", () => {
+  assert.equal(typeof site.name, "string");
+  assert.ok(!site.name.includes("[НАЗВАНИЕ]") && !/[\[\]]/.test(site.name), "название — заглушка: " + site.name);
+  assert.match(site.name, /^[A-Za-z][A-Za-z0-9 ]{2,15}$/, "короткое латинское название");
   assert.equal(site.demo, true);
   assert.equal(typeof site.tagline, "string");
 });
@@ -52,12 +54,28 @@ test("players: у каждой игры не меньше 5 игроков", () 
   });
 });
 
-test("news: 12 заглушек, уникальные id, game валиден или null", () => {
+test("news: 12 новостей, уникальные id, game валиден или null", () => {
   assert.equal(news.length, 12);
   assert.equal(new Set(news.map((n) => n.id)).size, 12);
   news.forEach((n) => {
     assert.ok(n.game === null || GAME_IDS.includes(n.game), n.id);
     assert.match(n.date, /^\d{4}-\d{2}-\d{2}$/);
-    assert.ok(n.title.includes("[НОВОСТЬ — впиши]") || n.excerpt.includes("[НОВОСТЬ — впиши]"), n.id);
   });
+});
+
+test("news: настоящие тексты без заглушек [НОВОСТЬ", () => {
+  news.forEach((n) => {
+    assert.ok(!n.title.includes("[НОВОСТЬ") && !n.excerpt.includes("[НОВОСТЬ"), n.id + ": осталась заглушка");
+    assert.ok(n.title.trim().length > 0 && n.excerpt.trim().length > 0, n.id);
+  });
+});
+
+test("news: у каждой игры минимум 2 новости, общих 1–2", () => {
+  GAME_IDS.forEach((g) => assert.ok(news.filter((n) => n.game === g).length >= 2, g));
+  const general = news.filter((n) => n.game === null).length;
+  assert.ok(general >= 1 && general <= 2, "общих: " + general);
+});
+
+test("news: даты в пределах двух месяцев до 2026-11-24", () => {
+  news.forEach((n) => assert.ok(n.date >= "2026-09-24" && n.date <= "2026-11-24", n.id + ": " + n.date));
 });

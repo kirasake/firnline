@@ -3,8 +3,8 @@
    В Node (тесты) экспортирует их через module.exports. Формат — README.md. */
 (function (root) {
   var data = {
-    name: "[НАЗВАНИЕ]",
-    tagline: "Профили, статистика и рейтинги игроков по четырём играм",
+    name: "Firnline",
+    tagline: "Профили, статистика и рейтинги игроков по четырём играм — выше линии снега",
     demo: true
   };
   if (typeof module === "object" && module.exports) module.exports = data;
