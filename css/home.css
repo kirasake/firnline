@@ -1,0 +1,188 @@
+/* home.css — только главная: hero, топ игроков, карточки игр, новости, манифест. */
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(100svh, 940px);
+  display: flex; align-items: stretch;
+  background: var(--bg-deep);
+}
+.hero__layers { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero__mountains, .hero__ridge { position: absolute; left: 0; width: 100%; }
+.hero__mountains { top: 0; height: 100%; }
+.hero__ridge { bottom: -1px; height: 34%; min-height: 140px; }
+.hero__tag {
+  position: absolute; z-index: 1;
+  right: -4%; top: 22%;
+  width: min(92vw, 1040px);
+  max-width: none;
+  opacity: .5;
+  mix-blend-mode: screen;
+  transform-origin: 60% 50%;
+}
+.hero__tag { rotate: -6deg; }
+.hero__ridge { z-index: 2; }
+/* Затемнение снизу и слева — под текстом контраст AA */
+.hero__layers::after {
+  content: ""; position: absolute; inset: 0; z-index: 3;
+  background:
+    linear-gradient(90deg, rgba(30, 44, 58, .72) 0%, rgba(30, 44, 58, .25) 55%, rgba(30, 44, 58, 0) 80%),
+    linear-gradient(0deg, rgba(46, 67, 87, .95) 0%, rgba(46, 67, 87, 0) 42%);
+}
+
+.hero__content {
+  position: relative; z-index: 4;
+  display: grid; grid-template-rows: auto 1fr auto auto; gap: 32px;
+  padding-top: clamp(40px, 7vw, 88px);
+  padding-bottom: clamp(32px, 5vw, 56px);
+}
+.hero__meta { align-self: start; }
+.hero__title { align-self: end; max-width: 11ch; font-size: clamp(60px, 17vw, 110px); }
+.hero__title .tm { font-size: .22em; }
+.hero__title-sub {
+  margin-top: .35em;
+  font-family: var(--font-mono); font-size: clamp(11px, 1.2vw, 13px); font-weight: 400;
+  letter-spacing: .18em; line-height: 1.4; color: var(--text);
+}
+.hero__foot { display: grid; gap: 28px; align-items: end; }
+.hero__lead { color: var(--text); }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
+
+.hero__stats {
+  margin: 8px 0 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;
+  padding-top: 20px; border-top: 1px solid var(--line);
+}
+.hero__stats > div { display: grid; gap: 4px; align-content: start; }
+.hero__stats dd {
+  margin: 0; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(30px, 4.4vw, 44px); line-height: 1; font-variant-numeric: tabular-nums;
+}
+.hero__stats-counter { grid-column: 1 / -1; }
+.hero__stats-counter dd { font-size: inherit; }
+
+@media (min-width: 900px) {
+  .hero__foot { grid-template-columns: minmax(0, 1fr) auto; }
+  .hero__stats { grid-template-columns: repeat(3, auto) 1fr; gap: 56px; }
+  .hero__stats-counter { grid-column: auto; justify-items: end; text-align: right; }
+}
+@media (max-width: 767.98px) {
+  .hero__tag { top: 30%; right: -18%; width: 128vw; }
+}
+
+/* ---------- ТОП ИГРОКОВ ---------- */
+.top-list { border-top: 1px solid var(--line); }
+.top-row { border-bottom: 1px solid var(--line); }
+.top-row__link {
+  display: grid; align-items: center; gap: 12px 20px;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  padding: 22px 0;
+  transition: background-color .25s var(--ease), padding .35s var(--ease);
+}
+.top-row__place {
+  font-family: var(--font-display); font-weight: 600; line-height: .85;
+  font-size: clamp(40px, 7vw, 88px); letter-spacing: -.02em; min-width: 1.15em;
+  color: var(--text); font-variant-numeric: tabular-nums;
+}
+.top-row__who { display: grid; gap: 6px; min-width: 0; }
+.top-row__nick {
+  font-family: var(--font-display); font-weight: 500; text-transform: uppercase;
+  font-size: clamp(22px, 3.2vw, 40px); line-height: 1; overflow-wrap: anywhere;
+}
+.top-row__score { display: grid; justify-items: end; gap: 4px; text-align: right; }
+.top-row__points { font-family: var(--font-mono); font-size: clamp(16px, 2vw, 22px); font-variant-numeric: tabular-nums; }
+.top-row__arrow { font-size: 18px; transition: transform .25s var(--ease); }
+.top-row__link:hover, .top-row__link:focus-visible { background: rgba(244, 247, 250, .05); padding-left: 16px; padding-right: 16px; }
+.top-row__link:hover .top-row__arrow { transform: translate(3px, -3px); }
+.top-row__link:focus-visible { outline-offset: -2px; }
+.top-row--first .top-row__place { font-size: clamp(64px, 12vw, 150px); }
+.top-row--first .top-row__nick { font-size: clamp(30px, 5vw, 64px); }
+
+@media (max-width: 599.98px) {
+  .top-row__link { grid-template-columns: auto auto minmax(0, 1fr); }
+  .top-row__score { grid-column: 2 / -1; justify-items: start; text-align: left; grid-auto-flow: column; justify-content: start; gap: 14px; align-items: baseline; }
+  .top-row__link .avatar { width: 44px; height: 44px; }
+}
+
+/* ---------- ИГРЫ ---------- */
+.games-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .games-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.games-grid > li { min-width: 0; }
+
+.game-card {
+  --chamfer: 22px;
+  display: grid; grid-template-rows: auto 1fr auto; gap: 20px;
+  min-height: 420px; padding: 24px 22px 22px;
+  overflow: hidden;
+}
+.game-card__top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.game-card__art {
+  align-self: center; justify-self: center; width: 100%; max-width: 240px;
+  color: var(--ink-soft); transition: transform .6s var(--ease);
+}
+.game-card:hover .game-card__art { transform: scale(1.04); }
+.game-card__name {
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
+  font-size: clamp(34px, 4vw, 48px); line-height: .9; letter-spacing: -.01em; overflow-wrap: anywhere;
+}
+.game-card__name .tm { font-size: .32em; }
+.game-card__specs { display: grid; gap: 2px; margin-top: 12px; }
+.game-card__specs .label { color: var(--ink); }
+.game-card__bottom { display: grid; gap: 18px; }
+.game-card__cta {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 14px; border-top: 1px solid rgba(30, 44, 58, .3);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+}
+.game-card__cta-arrow { font-family: var(--font-body); font-size: 18px; transition: transform .25s var(--ease); }
+.game-card:hover .game-card__cta-arrow { transform: translate(3px, -3px); }
+
+/* ---------- НОВОСТИ ---------- */
+.news-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .news-grid { grid-template-columns: 1.3fr 1fr 1fr; } }
+.news-grid > li { min-width: 0; }
+.news-card {
+  display: grid; align-content: space-between; gap: 40px;
+  height: 100%; min-height: 300px; padding: 26px 24px 24px;
+}
+.news-card__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.news-card__title {
+  font-family: var(--font-display); font-weight: 500; text-transform: uppercase;
+  font-size: clamp(24px, 2.6vw, 34px); line-height: 1; overflow-wrap: anywhere;
+}
+.news-grid > li:first-child .news-card__title { font-size: clamp(28px, 3.4vw, 46px); }
+.news-card__excerpt { margin-top: 16px; color: var(--muted); font-size: 13px; max-width: 46ch; }
+.news-card__no { font-family: var(--font-display); font-size: 64px; line-height: .8; color: var(--line-strong); font-weight: 600; }
+.news-card__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+
+/* ---------- МАНИФЕСТ ---------- */
+.manifest {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(100svh, 900px);
+  display: flex; align-items: flex-end;
+  background: var(--ice-900);
+}
+.manifest__layers { position: absolute; inset: 0; z-index: 0; }
+.manifest__mountains { width: 100%; height: 115%; position: absolute; top: -5%; left: 0; }
+.manifest__layers::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(30, 44, 58, .9) 0%, rgba(30, 44, 58, .2) 60%, rgba(30, 44, 58, .5) 100%);
+}
+.manifest__content {
+  position: relative; z-index: 1;
+  display: grid; gap: 48px; align-items: end;
+  padding-top: var(--section-y); padding-bottom: clamp(48px, 8vw, 96px);
+}
+.manifest__title {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(38px, 12vw, 120px); line-height: .88; letter-spacing: -.015em;
+}
+.manifest__side { display: grid; gap: 16px; max-width: 300px; }
+.manifest__credo { font-size: 13px; color: var(--muted); }
+.barcode { width: 220px; height: 48px; color: var(--text); }
+.barcode rect { fill: currentColor; }
+@media (min-width: 1000px) {
+  .manifest__content { grid-template-columns: minmax(0, 1fr) 300px; }
+  .manifest__title { font-size: min(8.4vw, 120px); }
+}

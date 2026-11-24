@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru" class="theme-arctic">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[НАЗВАНИЕ] — платформа для геймеров</title>
+  <meta name="description" content="Профили игроков, статистика, рейтинги и новости по Dota 2, CS2, Valorant и Apex Legends. Демо-данные.">
+  <meta name="theme-color" content="#2E4357">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect width='30' height='30' fill='%232E4357'/%3E%3Cpath d='M6 21 L12 11 L15 15 L18 9 L24 21' fill='none' stroke='%23F4F7FA' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/arctic.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script defer src="data/site.js"></script>
+  <script defer src="data/games.js"></script>
+  <script defer src="data/players.js"></script>
+  <script defer src="data/news.js"></script>
+  <script defer src="js/core.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/pages/home.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <noscript>
+    <p class="noscript-note">[ NO JS ] Профили, статистика и рейтинги собираются скриптом — включите JavaScript. Разделы сайта доступны по ссылкам ниже.</p>
+  </noscript>
+
+  <header data-gp-header class="site-header">
+    <div class="container site-header__bar">
+      <a class="logo" href="index.html"><span class="logo__name">[НАЗВАНИЕ]</span></a>
+      <nav class="nav" aria-label="Основное меню">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html" aria-current="page">[ Главная ]</a></li>
+          <li><a class="nav__link" href="players.html">[ Игроки ]</a></li>
+          <li><a class="nav__link" href="rankings.html">[ Рейтинги ]</a></li>
+          <li><a class="nav__link" href="news.html">[ Новости ]</a></li>
+        </ul>
+      </nav>
+      <span class="demo-badge">[ DEMO DATA ]</span>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <!-- HERO: слои глубины — горы → граффити-тег → передний хребет → контент -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__layers" aria-hidden="true">
+        <svg class="hero__mountains" data-parallax="0.18" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" focusable="false">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2E4357"/>
+              <stop offset=".55" stop-color="#557089"/>
+              <stop offset=".82" stop-color="#8FA8BF"/>
+            </linearGradient>
+            <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#AEC3D6" stop-opacity="0"/>
+              <stop offset="1" stop-color="#AEC3D6" stop-opacity=".45"/>
+            </linearGradient>
+            <linearGradient id="peak" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8FA8BF"/>
+              <stop offset="1" stop-color="#3F5873"/>
+            </linearGradient>
+          </defs>
+          <rect width="1600" height="900" fill="url(#sky)"/>
+          <path d="M0 600 L120 540 L210 575 L330 500 L420 545 L560 470 L650 520 L760 455 L880 530 L1010 480 L1120 540 L1250 470 L1380 530 L1490 490 L1600 540 V900 H0Z" fill="#AEC3D6" opacity=".45"/>
+          <rect y="460" width="1600" height="220" fill="url(#mist)"/>
+          <path d="M0 700 L180 610 L300 650 L470 520 L560 560 L700 360 L790 470 L860 440 L980 560 L1100 500 L1240 600 L1360 555 L1600 660 V900 H0Z" fill="url(#peak)"/>
+          <path d="M700 360 L790 470 L745 640 L705 560 Z M470 520 L560 560 L520 650 Z M1100 500 L1240 600 L1150 640 Z" fill="#3F5873" opacity=".55"/>
+          <path d="M700 360 L790 470 L760 458 L744 486 L718 444 L694 474 L670 436 L642 446 Z" fill="#DCE6EF" opacity=".85"/>
+          <path d="M470 520 L520 542 L500 548 L484 538 L462 553 L438 545 Z M1100 500 L1150 536 L1124 532 L1108 546 L1090 530 L1066 540 Z" fill="#DCE6EF" opacity=".7"/>
+          <rect y="620" width="1600" height="160" fill="url(#mist)"/>
+        </svg>
+
+        <svg class="hero__tag" data-parallax="0.08" viewBox="0 0 1000 460" focusable="false">
+          <defs>
+            <filter id="spray" x="-15%" y="-15%" width="130%" height="130%">
+              <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+              <feMorphology in="SourceAlpha" operator="dilate" radius="9" result="fat"/>
+              <feGaussianBlur in="fat" stdDeviation="9" result="halo"/>
+              <feColorMatrix in="noise" type="matrix" values="0 0 0 0 .957  0 0 0 0 .969  0 0 0 0 .98  9 0 0 0 -5.1" result="dots"/>
+              <feComposite in="dots" in2="halo" operator="in" result="overspray"/>
+              <feGaussianBlur in="rough" stdDeviation="1" result="soft"/>
+              <feMerge><feMergeNode in="overspray"/><feMergeNode in="soft"/></feMerge>
+            </filter>
+          </defs>
+          <g filter="url(#spray)" fill="none" stroke="#F4F7FA" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke-width="30">
+              <path d="M300 120 C230 60 110 90 105 180 C100 265 215 280 280 190"/>
+              <path d="M300 105 C300 200 300 300 262 360 C225 420 120 430 95 375 C75 330 160 300 310 330"/>
+              <path d="M600 140 C535 85 420 115 418 200 C416 275 520 285 585 205"/>
+              <path d="M605 125 C605 220 600 310 565 365 C530 420 440 425 420 380 C400 340 470 320 700 345"/>
+            </g>
+            <g stroke-width="12">
+              <path d="M60 438 C300 412 560 400 900 330"/>
+              <path d="M858 300 L905 328 L872 372"/>
+              <path d="M690 92 L716 34 L742 90 L772 40 L790 98"/>
+              <path d="M182 272 L182 332 M250 248 L250 298 M502 278 L502 345 M640 352 L640 398"/>
+            </g>
+            <g fill="#F4F7FA" stroke="none">
+              <circle cx="182" cy="340" r="8"/><circle cx="250" cy="306" r="7"/>
+              <circle cx="502" cy="353" r="8"/><circle cx="640" cy="406" r="7"/>
+              <circle cx="820" cy="120" r="9"/><circle cx="848" cy="150" r="5"/>
+            </g>
+          </g>
+        </svg>
+
+        <svg class="hero__ridge" data-parallax="0.04" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" focusable="false">
+          <path d="M0 150 L140 100 L260 130 L420 60 L560 120 L700 90 L880 160 L1040 80 L1200 130 L1360 70 L1600 140 V300 H0Z" fill="#2E4357"/>
+          <path d="M420 60 L470 80 L455 86 L436 78 L410 90 L392 78 Z M1360 70 L1410 92 L1390 96 L1372 88 L1350 98 L1334 86 Z" fill="#8FA8BF" opacity=".6"/>
+          <path d="M0 220 L200 190 L380 215 L620 175 L860 220 L1100 185 L1340 215 L1600 190 V300 H0Z" fill="#3F5873"/>
+        </svg>
+      </div>
+
+      <div class="container hero__content">
+        <div class="hero__meta label-stack" data-reveal>
+          <span class="label label--strong">[ GAMER PLATFORM / SEASON 26 ]</span>
+          <span class="label">PROTOCOL: RANKED OPS_01</span>
+          <span class="label">DATA: DEMO / NOT REAL PEOPLE</span>
+        </div>
+
+        <h1 class="h-mega hero__title reveal-lines" id="hero-title">
+          <span class="line-mask"><span><span data-site-name>[НАЗВАНИЕ]</span><span class="tm" aria-hidden="true">™</span></span></span>
+          <span class="line-mask hero__title-sub" style="--i:1"><span>Профили. Статистика. Рейтинги</span></span>
+        </h1>
+
+        <div class="hero__foot">
+          <p class="lead hero__lead" data-reveal style="--i:2" data-site-tagline>Профили, статистика и рейтинги игроков по четырём играм</p>
+          <div class="hero__actions" data-reveal style="--i:3">
+            <a class="btn-oct btn-oct--deep" href="rankings.html"><span>Смотреть рейтинги</span><span class="btn-oct__arrow" aria-hidden="true">↗</span></a>
+            <a class="link-arrow" href="players.html">Все игроки <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <dl class="hero__stats" data-reveal style="--i:4">
+          <div><dt class="label">PLAYERS</dt><dd data-stat="players">24</dd></div>
+          <div><dt class="label">GAMES</dt><dd data-stat="games">04</dd></div>
+          <div><dt class="label">NEWS</dt><dd data-stat="news">12</dd></div>
+          <div class="hero__stats-counter">
+            <dt class="label">[ DOTA 2 / CS2 / VALORANT / APEX ]</dt>
+            <dd><span class="counter" aria-label="четыре игры"><span aria-hidden="true">01</span><span class="counter__line" aria-hidden="true"></span><span class="counter__total" aria-hidden="true">04</span></span></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ТОП ИГРОКОВ -->
+    <section class="section top" aria-labelledby="top-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="label label--strong" data-reveal>[ 01 / OVERALL RATING ]</span>
+            <h2 class="h2" id="top-title" data-reveal>Топ игроков<span class="tm" aria-hidden="true">™</span></h2>
+          </div>
+          <div class="section-head__aside" data-reveal>
+            <div class="label-stack">
+              <span class="label">SUM OF RATING / ALL GAMES</span>
+              <span class="label">TOP 05 OF 24</span>
+            </div>
+            <a class="link-arrow" href="players.html">Все игроки <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <ol class="top-list" data-top-list aria-label="Пять лучших игроков по общему рейтингу"></ol>
+      </div>
+    </section>
+
+    <!-- ИГРЫ -->
+    <section class="section section--deep games" aria-labelledby="games-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="label label--strong" data-reveal>[ 02 / GAME SERIES ]</span>
+            <h2 class="h2" id="games-title" data-reveal>Игры<span class="tm" aria-hidden="true">™</span></h2>
+          </div>
+          <div class="section-head__aside" data-reveal>
+            <span class="counter" aria-label="четыре игры"><span aria-hidden="true">01</span><span class="counter__line" aria-hidden="true"></span><span class="counter__total" aria-hidden="true">04</span></span>
+            <div class="label-stack">
+              <span class="label">ТОЛЬКО НАЗВАНИЯ</span>
+              <span class="label">БЕЗ ЛОГОТИПОВ И АРТА</span>
+            </div>
+          </div>
+        </div>
+        <ul class="games-grid" data-games-list>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=dota2"><span class="game-card__name">Dota 2</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=cs2"><span class="game-card__name">CS2</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=valorant"><span class="game-card__name">Valorant</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=apex"><span class="game-card__name">Apex Legends</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- НОВОСТИ -->
+    <section class="section news" aria-labelledby="news-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-head__meta">
+            <span class="label label--strong" data-reveal>[ 03 / FIELD REPORTS ]</span>
+            <h2 class="h2" id="news-title" data-reveal>Новости<span class="tm" aria-hidden="true">™</span></h2>
+          </div>
+          <div class="section-head__aside" data-reveal>
+            <span class="label">LATEST 03 / DATE DESC</span>
+            <a class="link-arrow" href="news.html">Все новости <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <ul class="news-grid" data-news-list></ul>
+      </div>
+    </section>
+
+    <!-- МАНИФЕСТ -->
+    <section class="manifest" aria-labelledby="manifest-title">
+      <div class="manifest__layers" aria-hidden="true">
+        <svg class="manifest__mountains" data-parallax="-0.06" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <defs>
+            <linearGradient id="msky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1E2C3A"/>
+              <stop offset=".6" stop-color="#2E4357"/>
+              <stop offset="1" stop-color="#3F5873"/>
+            </linearGradient>
+            <filter id="noise-blur" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" seed="2" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="40" xChannelSelector="R" yChannelSelector="G" result="d"/>
+              <feGaussianBlur in="d" stdDeviation="7"/>
+            </filter>
+          </defs>
+          <rect width="1600" height="900" fill="url(#msky)"/>
+          <path d="M0 560 L240 420 L380 480 L620 250 L760 380 L900 300 L1080 450 L1260 340 L1600 520 V900 H0Z" fill="#3F5873"/>
+          <path d="M620 250 L760 380 L725 372 L700 400 L672 352 L640 380 L600 282 Z M1260 340 L1340 392 L1310 390 L1290 404 L1268 386 L1240 396 Z" fill="#8FA8BF" opacity=".55"/>
+          <g transform="translate(-160 150)" filter="url(#noise-blur)" fill="none" stroke="#DCE6EF" stroke-width="34" stroke-linecap="round" opacity=".35">
+            <path d="M1020 260 C950 200 830 230 825 320 C820 405 935 420 1000 330 M1020 245 C1020 340 1020 440 982 500 C945 560 840 570 815 515 C795 470 880 440 1080 470"/>
+            <path d="M1320 280 C1255 225 1140 255 1138 340 C1136 415 1240 425 1305 345 M1325 265 C1325 360 1320 450 1285 505 C1250 560 1160 565 1140 520 C1120 480 1190 460 1420 485"/>
+          </g>
+          <path d="M0 720 L300 660 L560 700 L860 640 L1180 700 L1600 650 V900 H0Z" fill="#2E4357"/>
+        </svg>
+      </div>
+      <div class="container manifest__content">
+        <h2 class="manifest__title reveal-lines" id="manifest-title">
+          <span class="line-mask"><span>Играй холодно</span></span>
+          <span class="line-mask" style="--i:1"><span>Считай честно</span></span>
+          <span class="line-mask" style="--i:2"><span>Поднимайся</span></span>
+        </h2>
+        <div class="manifest__side" data-reveal style="--i:2">
+          <span class="label label--strong">[ MANIFEST / 03 LINES ]</span>
+          <p class="manifest__credo">Винрейт — это победы, делённые на матчи. K/D — убийства на смерти. Никаких накруток: формулы открыты и проверены тестами.</p>
+          <svg class="barcode" data-barcode viewBox="0 0 220 48" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+          <span class="label">GP-26 / 0024-04-12 / COLD SERIES™</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-gp-footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__note"><strong>Игроки и цифры условные.</strong> Это демо-данные для примера.</p>
+    </div>
+  </footer>
+</body>
+</html>
