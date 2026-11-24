@@ -257,6 +257,8 @@
     if (footer) buildFooter(footer);
     reveal(document);
     parallax();
+    // Флаг для запасного скрипта в <head>: без него .js снимается и reveal-контент остаётся видимым.
+    document.documentElement.classList.add("gp-mounted");
   }
 
   // Класс .js до первой отрисовки: стили reveal и бургера работают только при JS.
