@@ -1,4 +1,4 @@
-/* home.js — главная: hero-цифры, топ-5 по общему рейтингу, карточки игр, 3 последние новости, штрихкод. */
+/* home.js — главная: hero-цифры, топ-5 по общему рейтингу, карточки игр с обложками, 3 последние новости, штрихкод. */
 (function (root) {
   "use strict";
   var GP = root.GP, UI = root.GPUI, D = root.GP_DATA || {};
@@ -69,6 +69,32 @@
         "ALT " + pad(index + 1) + " / GRID " + (index * 7 + 21)));
   }
 
+  /** Обложки игр (assets/img, сгенерированы, без логотипов и арта игр); alt — на русском. */
+  var COVERS = {
+    dota2: "Арена в снежной долине: ледяная река и три тропы — настроение MOBA",
+    cs2: "Пустой бетонный коридор заброшенного цеха в инее — настроение тактического шутера",
+    valorant: "Геометрическая площадь со светящимся энергобарьером — настроение тактического шутера с героями",
+    apex: "Ледяная пустошь, на горизонте смыкается штормовое кольцо — настроение батл-рояля"
+  };
+
+  /** Обложка игры; если файла нет или он не загрузился — абстрактный SVG-рельеф. */
+  function gameCover(g, index) {
+    if (!Object.prototype.hasOwnProperty.call(COVERS, g.id)) return gameArt(index);
+    var img = el("img", { class: "game-card__cover", "data-photo": "", src: "assets/img/" + g.id + ".webp",
+      width: "800", height: "600", alt: COVERS[g.id], loading: "lazy", decoding: "async" });
+    img.addEventListener("error", function () { img.replaceWith(gameArt(index)); }, { once: true });
+    return img;
+  }
+
+  /** Статичные фото (hero, манифест): битое прячем — под ним остаётся SVG-фон. */
+  function guardPhotos() {
+    document.querySelectorAll("img[data-photo]").forEach(function (img) {
+      var hide = function () { img.classList.add("is-broken"); };
+      if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) hide();
+      else img.addEventListener("error", hide, { once: true });
+    });
+  }
+
   function fillGames() {
     var list = document.querySelector("[data-games-list]");
     if (!list || !games.length) return;
@@ -82,7 +108,7 @@
           el("div", { class: "game-card__top" },
             el("span", { class: "label" }, "[ " + pad(i + 1) + " / GAME ]"),
             el("span", { class: "label" }, pad(i + 1) + " — " + pad(games.length))),
-          gameArt(i),
+          gameCover(g, i),
           el("div", { class: "game-card__bottom" },
             el("div", null,
               el("h3", { class: "game-card__name" }, g.short),
@@ -134,6 +160,7 @@
   }
 
   // Наполняем до mount, чтобы reveal увидел новые элементы.
+  guardPhotos();
   fillHero();
   fillTop();
   fillGames();

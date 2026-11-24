@@ -43,7 +43,7 @@
   </header>
 
   <main id="main" class="page">
-    <!-- HERO: слои глубины — горы → граффити-тег → передний хребет → контент -->
+    <!-- HERO: слои глубины — SVG-горы (запасной фон) → фото гор → граффити-тег → фигура → контент -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__layers" aria-hidden="true">
         <svg class="hero__mountains" data-parallax="0.18" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" focusable="false">
@@ -71,6 +71,8 @@
           <path d="M470 520 L520 542 L500 548 L484 538 L462 553 L438 545 Z M1100 500 L1150 536 L1124 532 L1108 546 L1090 530 L1066 540 Z" fill="#DCE6EF" opacity=".7"/>
           <rect y="620" width="1600" height="160" fill="url(#mist)"/>
         </svg>
+
+        <img class="hero__photo" data-photo data-parallax="0.14" src="assets/img/hero.webp" width="1600" height="896" alt="Заснеженный горный хребет в холодной дымке" fetchpriority="high" decoding="async">
 
         <svg class="hero__tag" data-parallax="0.08" viewBox="0 0 1000 460" focusable="false">
           <defs>
@@ -111,6 +113,7 @@
           <path d="M420 60 L470 80 L455 86 L436 78 L410 90 L392 78 Z M1360 70 L1410 92 L1390 96 L1372 88 L1350 98 L1334 86 Z" fill="#8FA8BF" opacity=".6"/>
           <path d="M0 220 L200 190 L380 215 L620 175 L860 220 L1100 185 L1340 215 L1600 190 V300 H0Z" fill="#3F5873"/>
         </svg>
+        <img class="hero__figure" data-photo data-parallax="0.03" src="assets/img/hero-figure.webp" width="720" height="900" alt="Человек в зимней тех-экипировке: капюшон, балаклава и горнолыжная маска скрывают лицо" decoding="async">
       </div>
 
       <div class="container hero__content">
@@ -176,16 +179,16 @@
           <div class="section-head__aside" data-reveal>
             <span class="counter" aria-label="четыре игры"><span aria-hidden="true">01</span><span class="counter__line" aria-hidden="true"></span><span class="counter__total" aria-hidden="true">04</span></span>
             <div class="label-stack">
-              <span class="label">ТОЛЬКО НАЗВАНИЯ</span>
+              <span class="label">ОБЛОЖКИ — НАСТРОЕНИЕ ЖАНРА</span>
               <span class="label">БЕЗ ЛОГОТИПОВ И АРТА</span>
             </div>
           </div>
         </div>
         <ul class="games-grid" data-games-list>
-          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=dota2"><span class="game-card__name">Dota 2</span></a></li>
-          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=cs2"><span class="game-card__name">CS2</span></a></li>
-          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=valorant"><span class="game-card__name">Valorant</span></a></li>
-          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=apex"><span class="game-card__name">Apex Legends</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=dota2"><img class="game-card__cover" data-photo src="assets/img/dota2.webp" width="800" height="600" alt="Арена в снежной долине: ледяная река и три тропы — настроение MOBA" loading="lazy" decoding="async"><span class="game-card__name">Dota 2</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=cs2"><img class="game-card__cover" data-photo src="assets/img/cs2.webp" width="800" height="600" alt="Пустой бетонный коридор заброшенного цеха в инее — настроение тактического шутера" loading="lazy" decoding="async"><span class="game-card__name">CS2</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=valorant"><img class="game-card__cover" data-photo src="assets/img/valorant.webp" width="800" height="600" alt="Геометрическая площадь со светящимся энергобарьером — настроение тактического шутера с героями" loading="lazy" decoding="async"><span class="game-card__name">Valorant</span></a></li>
+          <li><a class="game-card card-chamfer card-chamfer--light" href="rankings.html?game=apex"><img class="game-card__cover" data-photo src="assets/img/apex.webp" width="800" height="600" alt="Ледяная пустошь, на горизонте смыкается штормовое кольцо — настроение батл-рояля" loading="lazy" decoding="async"><span class="game-card__name">Apex Legends</span></a></li>
         </ul>
       </div>
     </section>
@@ -232,6 +235,7 @@
           </g>
           <path d="M0 720 L300 660 L560 700 L860 640 L1180 700 L1600 650 V900 H0Z" fill="#2E4357"/>
         </svg>
+        <img class="manifest__photo" data-photo data-parallax="-0.06" src="assets/img/manifest.webp" width="1600" height="896" alt="Острые заснеженные вершины, с гребня ветер срывает снег" loading="lazy" decoding="async">
       </div>
       <div class="container manifest__content">
         <h2 class="manifest__title reveal-lines" id="manifest-title">

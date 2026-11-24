@@ -1,5 +1,10 @@
 /* home.css — только главная: hero, топ игроков, карточки игр, новости, манифест. */
 
+/* Сгенерированные фото (assets/img). Если файл не загрузился — прячем, под ним остаётся SVG-запасной фон.
+   color: transparent прячет текст alt у битой картинки до того, как скрипт поставит .is-broken. */
+img[data-photo] { color: transparent; }
+img[data-photo].is-broken { display: none; }
+
 /* ---------- HERO ---------- */
 .hero {
   position: relative; isolation: isolate; overflow: hidden;
@@ -8,11 +13,22 @@
   background: var(--bg-deep);
 }
 .hero__layers { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.hero__mountains, .hero__ridge { position: absolute; left: 0; width: 100%; }
+.hero__mountains, .hero__ridge { position: absolute; left: 0; width: 100%; z-index: 0; }
 .hero__mountains { top: 0; height: 100%; }
+/* Слои: SVG-горы и хребет (запас) → фото гор → тег → фигура → затемнение → контент */
+.hero__photo {
+  position: absolute; z-index: 1; left: 0; top: -4%;
+  width: 100%; height: 108%; max-width: none;
+  object-fit: cover; object-position: 65% 60%;
+}
+.hero__figure {
+  position: absolute; z-index: 3; bottom: 0; right: max(0px, calc((100vw - 1320px) / 2));
+  height: 92%; width: auto; max-width: none;
+  object-fit: contain; object-position: right bottom;
+}
 .hero__ridge { bottom: -1px; height: 34%; min-height: 140px; }
 .hero__tag {
-  position: absolute; z-index: 1;
+  position: absolute; z-index: 2;
   right: -4%; top: 22%;
   width: min(92vw, 1040px);
   max-width: none;
@@ -21,17 +37,16 @@
   transform-origin: 60% 50%;
 }
 .hero__tag { rotate: -6deg; }
-.hero__ridge { z-index: 2; }
-/* Затемнение снизу и слева — под текстом контраст AA */
+/* Затемнение снизу и слева — под текстом контраст AA поверх светлого фото */
 .hero__layers::after {
-  content: ""; position: absolute; inset: 0; z-index: 3;
+  content: ""; position: absolute; inset: 0; z-index: 4;
   background:
-    linear-gradient(90deg, rgba(30, 44, 58, .72) 0%, rgba(30, 44, 58, .25) 55%, rgba(30, 44, 58, 0) 80%),
-    linear-gradient(0deg, rgba(46, 67, 87, .95) 0%, rgba(46, 67, 87, 0) 42%);
+    linear-gradient(90deg, rgba(30, 44, 58, .86) 0%, rgba(30, 44, 58, .55) 45%, rgba(30, 44, 58, 0) 78%),
+    linear-gradient(0deg, rgba(46, 67, 87, .96) 0%, rgba(46, 67, 87, .4) 30%, rgba(46, 67, 87, 0) 55%);
 }
 
 .hero__content {
-  position: relative; z-index: 4;
+  position: relative; z-index: 5;
   display: grid; grid-template-rows: auto 1fr auto auto; gap: 32px;
   padding-top: clamp(40px, 7vw, 88px);
   padding-bottom: clamp(32px, 5vw, 56px);
@@ -68,6 +83,12 @@
 }
 @media (max-width: 767.98px) {
   .hero__tag { top: 30%; right: -18%; width: 128vw; }
+  .hero__figure { height: 68%; right: -22%; opacity: .9; }
+  .hero__layers::after {
+    background:
+      linear-gradient(90deg, rgba(30, 44, 58, .82) 0%, rgba(30, 44, 58, .6) 60%, rgba(30, 44, 58, .3) 100%),
+      linear-gradient(0deg, rgba(46, 67, 87, .96) 0%, rgba(46, 67, 87, .5) 35%, rgba(46, 67, 87, 0) 60%);
+  }
 }
 
 /* ---------- ТОП ИГРОКОВ ---------- */
@@ -122,6 +143,12 @@
   color: var(--ink-soft); transition: transform .6s var(--ease);
 }
 .game-card:hover .game-card__art { transform: scale(1.04); }
+.game-card__cover {
+  align-self: center; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  transition: transform .6s var(--ease);
+}
+.game-card:hover .game-card__cover { transform: scale(1.03); }
 .game-card__name {
   font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
   font-size: clamp(34px, 4vw, 48px); line-height: .9; letter-spacing: -.01em; overflow-wrap: anywhere;
@@ -164,7 +191,8 @@
   background: var(--ice-900);
 }
 .manifest__layers { position: absolute; inset: 0; z-index: 0; }
-.manifest__mountains { width: 100%; height: 115%; position: absolute; top: -5%; left: 0; }
+.manifest__mountains, .manifest__photo { width: 100%; height: 115%; position: absolute; top: -5%; left: 0; max-width: none; }
+.manifest__photo { object-fit: cover; object-position: 70% 40%; }
 .manifest__layers::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(0deg, rgba(30, 44, 58, .9) 0%, rgba(30, 44, 58, .2) 60%, rgba(30, 44, 58, .5) 100%);
